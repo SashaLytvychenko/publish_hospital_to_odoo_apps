@@ -1,0 +1,96 @@
+<odoo>
+
+    <record id='hr_hospital_patient_tree' model='ir.ui.view'>
+        <field name='name'>hr.hospital.patient.tree ()</field>
+        <field name='model'>hr.hospital.patient</field>
+        <field name='arch' type='xml'>
+            <tree>
+                <field name='surname_name'/>
+                <field name='gender'/>
+                <field name='phone'/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id='hr_hospital_patient_form' model='ir.ui.view'>
+        <field name='name'>hr.hospital.patient.form ()</field>
+        <field name='model'>hr.hospital.patient</field>
+        <field name='arch' type='xml'>
+            <form>
+                <header>
+                    <button name="%(hr_hospital.hr_hospital_reappointment_doctor_wizard_action)d"
+                            string="Reappoint Doctor"
+                            type="action"/>
+                    <button name="%(hr_hospital.action_hr_hospital_patient_visit_open_from_patient)d"
+                            string="Patient visit history" type="action"
+                            help="Redirect to patient history"/>
+                </header>
+                <sheet>
+                    <field name='image' widget='image' class='oe_avatar'/>
+                    <group>
+                        <group>
+                            <field name="surname_name"/>
+                            <field name='phone'/>
+                            <field name='passport_code'/>
+                            <field name='date_birth'/>
+                            <field name='age'/>
+                            <field name='user_id'/>
+                        </group>
+                        <group>
+                            <field name='email'/>
+                            <field name='gender'/>
+                            <field name='doctor_id'/>
+                            <field name='contact_person_ids'
+                                   widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="history_diagnosis"
+                              string='History diagnosis'>
+                            <group>
+                                <field name='diagnosis_ids'
+                                       options="{'codeview': 'true'}"
+                                       class='oe-bordered-editor'/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"
+                           groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id='hr_hospital_patient_search' model='ir.ui.view'>
+        <field name='name'>hr.hospital.patient.search</field>
+        <field name='model'>hr.hospital.patient</field>
+        <field name='arch' type='xml'>
+            <search>
+                <field name='surname_name'/>
+                <field name='phone'/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id='action_hr_hospital_patient_window'
+            model='ir.actions.act_window'>
+        <field name='name'>Patient</field>
+        <field name='type'>ir.actions.act_window</field>
+        <field name='res_model'>hr.hospital.patient</field>
+        <field name='view_mode'>tree,form</field>
+    </record>
+
+    <menuitem id='hr_hospital_patient'
+              action='action_hr_hospital_patient_window'
+              parent='hr_hospital_patient_menu'
+              name='Patient' sequence='300'/>
+</odoo>
+
+
+
+

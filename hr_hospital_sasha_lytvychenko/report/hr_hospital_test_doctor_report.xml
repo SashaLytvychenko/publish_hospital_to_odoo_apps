@@ -1,0 +1,155 @@
+<odoo>
+    <record id="doctor_report_paperformat" model="report.paperformat">
+        <field name="name">A4 doctor report</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">5</field>
+        <field name="dpi">96</field>
+    </record>
+
+
+    <record id="doctor_report" model="ir.actions.report">
+        <field name="name">Doctor Report</field>
+        <field name="model">hr.hospital.doctor</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">hr_hospital.report_doctor_main</field>
+        <field name="report_file">hr_hospital.report_doctor_main</field>
+        <field name="print_report_name">(object.surname_name)</field>
+        <field name="attachment"/>
+        <field name="binding_model_id" ref="model_hr_hospital_doctor"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id"
+               ref="hr_hospital.doctor_report_paperformat"/>
+    </record>
+
+
+    <template id="hr_hospital_company_template">
+        <div style="text-align: center; margin: 20px auto; padding: 20px;">
+            <t t-set="company"
+               t-value="doc.env['res.company'].search([], limit=1)"/>
+            <img t-attf-src="/logo.png?company={{company.id}}"
+                 style="height: 48px;" t-att-alt="company.name"/>
+            <h4>
+                <span t-field="company.name"/>
+            </h4>
+            <p>
+                <t t-esc="company.street"/>
+                <br/>
+                <t t-esc="company.city"/>
+                <t t-esc="company.zip"/>,
+                <t t-esc="company.country_id.name"/>
+            </p>
+            <p>Phone:<t t-esc="company.phone"/>| Email:
+                <t t-esc="company.email"/>
+            </p>
+        </div>
+    </template>
+
+
+    <template id="hr_hospital_doctor_template">
+        <div style="padding: 20px;">
+            <h4>Doctor:
+                <t t-esc="doc.surname_name"/>
+            </h4>
+            <p>
+                <strong>Specialty:</strong>
+                <t t-esc="doc.specialization"/>
+            </p>
+            <t t-if="doc.is_intern">
+                <p>
+                    <strong>Intern:</strong>
+                    <t t-esc="doc.is_intern"/>
+                    |
+                    <strong>Mentor:</strong>
+                    <t t-esc="doc.mentor_id.name"/>
+                </p>
+            </t>
+        </div>
+    </template>
+
+
+    <template id="hr_hospital_visits_template">
+        <div style="padding: 20px;">
+            <h4>Visits history</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date visit</th>
+                        <th>Patient</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="doc.visit_ids.sorted(key='planned_visit_date', reverse=True)"
+                       t-as="visit">
+                        <tr t-attf-style="background-color: #{'yellow' if visit.visit_status == 'planned' else 'green' if visit.visit_status == 'completed' else 'red' if visit.visit_status == 'cancelled' else ''};">
+                            <td>
+                                <t t-esc="visit.planned_visit_date"/>
+                            </td>
+                            <td>
+                                <t t-esc="visit.patient_id.surname_name"/>
+                                (<t t-esc="visit.patient_id.gender"/>)
+                            </td>
+                            <td>
+                                <t t-esc="visit.patient_id.phone"/>
+                            </td>
+                            <td>
+                                <t t-esc="visit.visit_status"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </template>
+
+    <template id="hr_hospital_page_footer">
+        <t t-set="company"
+           t-value="doc.env['res.company'].search([], limit=1)"/>
+        <div style="text-align: center; position: fixed; bottom: 0; width: 100%;">
+            <p>
+                <strong>Printed:</strong>
+                <t t-esc="time.strftime('%Y-%m-%d %H:%M:%S')"/>
+                |
+                <strong>City:</strong>
+                <t t-esc="company.city"/>
+            </p>
+        </div>
+    </template>
+
+
+    <template id="report_doctor_main">
+        <t t-call="web.html_container">
+            <style>.page-break {page-break-after: always;}</style>
+            <t t-foreach="docs" t-as="doc">
+
+                <div class="row">
+                    <t t-call="hr_hospital.hr_hospital_company_template"/>
+                </div>
+
+
+                <div class="row">
+                    <t t-call="hr_hospital.hr_hospital_doctor_template"/>
+                </div>
+
+
+                <div class="row">
+                    <t t-call="hr_hospital.hr_hospital_visits_template"/>
+                </div>
+
+
+                <t t-call="hr_hospital.hr_hospital_page_footer"/>
+                <div class="page-break"></div>
+            </t>
+        </t>
+    </template>
+</odoo>

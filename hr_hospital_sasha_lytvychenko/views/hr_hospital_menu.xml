@@ -1,0 +1,14 @@
+<odoo>
+    <menuitem id='hr_hospital_main_menu'
+              web_icon='hr_hospital,static/description/icon.png'
+              name='Hospital' sequence='25'/>
+
+    <menuitem id='hr_hospital_patient_menu'
+              parent='hr_hospital_main_menu'
+              name='Patient' sequence='400'/>
+
+     <menuitem id='hr_hospital_disease_type_menu'
+              parent='hr_hospital_main_menu'
+              name='Types of disease' sequence='700'/>
+</odoo>
+

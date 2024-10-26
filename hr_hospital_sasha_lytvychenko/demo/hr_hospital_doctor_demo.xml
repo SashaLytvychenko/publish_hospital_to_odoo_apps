@@ -1,0 +1,45 @@
+<odoo>
+    <record id='hr_hospital_doctor_1' model='hr.hospital.doctor'>
+        <field name='surname_name'>Hansi Flick</field>
+        <field name='phone'>123456789</field>
+        <field name='email'>flick@gmail.com</field>
+        <field name='specialization'>pathology</field>
+    </record>
+
+    <record id='hr_hospital_doctor_2' model='hr.hospital.doctor'>
+        <field name='surname_name'>Massimiliano Allegri</field>
+        <field name='phone'>987654321</field>
+        <field name='email'>allegri@gmail.com</field>
+        <field name='specialization'>pediatrics</field>
+    </record>
+
+    <record id='hr_hospital_doctor_3' model='hr.hospital.doctor'>
+        <field name='surname_name'>Lionel Scaloni</field>
+        <field name='phone'>+38049595943</field>
+        <field name='email'>scaloni@gmail.com</field>
+        <field name='specialization'>pediatrics</field>
+    </record>
+
+    <record id='hr_hospital_doctor_4' model='hr.hospital.doctor'>
+        <field name='surname_name'>Sergio Ramos</field>
+        <field name='phone'>+3808458485</field>
+        <field name='email'>ramos@gmail.com</field>
+        <field name='specialization'>pediatrics</field>
+    </record>
+
+    <record id='hr_hospital_doctor_5' model='hr.hospital.doctor'>
+        <field name='surname_name'>Sadio Mane</field>
+        <field name='phone'>+3804834838</field>
+        <field name='email'>mane@gmail.com</field>
+        <field name='specialization'>pediatrics</field>
+        <field name="is_intern">True</field>
+    </record>
+
+    <record id='hr_hospital_doctor_6' model='hr.hospital.doctor'>
+        <field name='surname_name'>Trent Arnold</field>
+        <field name='phone'>+380676767</field>
+        <field name='email'>arnold@gmail.com</field>
+        <field name='specialization'>pediatrics</field>
+        <field name="is_intern">True</field>
+    </record>
+</odoo>

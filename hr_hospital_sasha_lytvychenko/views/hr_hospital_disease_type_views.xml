@@ -1,0 +1,68 @@
+<odoo>
+
+    <record id='hr_hospital_disease_type_tree' model='ir.ui.view'>
+        <field name='name'>hr.hospital.disease.type.tree ()</field>
+        <field name='model'>hr.hospital.disease.type</field>
+        <field name='arch' type='xml'>
+            <tree>
+                <field name='name'/>
+                <field name='disease_category_id'/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id='hr_hospital_disease_type_form' model='ir.ui.view'>
+        <field name='name'>hr.hospital.disease.type.form ()</field>
+        <field name='model'>hr.hospital.disease.type</field>
+        <field name='arch' type='xml'>
+            <form>
+                <header></header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name='name'/>
+                            <field name='description'/>
+                        </group>
+                        <group>
+                            <field name='disease_category_id'/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id='hr_hospital_disease_type_search' model='ir.ui.view'>
+        <field name='name'>hr.hospital.disease.type.search</field>
+        <field name='model'>hr.hospital.disease.type</field>
+        <field name='arch' type='xml'>
+            <search>
+                <searchpanel>
+                    <field name='disease_category_id' string="Disease panel"
+                           select='one' enable_counters="1"
+                           hierarchize="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+
+    <record id='action_hr_hospital_disease_type_window'
+            model='ir.actions.act_window'>
+        <field name='name'>Types of diseases</field>
+        <field name='type'>ir.actions.act_window</field>
+        <field name='res_model'>hr.hospital.disease.type</field>
+        <field name='view_mode'>tree,form</field>
+    </record>
+
+    <menuitem id='hr_hospital_disease_type'
+              action='action_hr_hospital_disease_type_window'
+              parent='hr_hospital_disease_type_menu'
+              name='Diseases' sequence='100'/>
+</odoo>
+
+
+
+
+

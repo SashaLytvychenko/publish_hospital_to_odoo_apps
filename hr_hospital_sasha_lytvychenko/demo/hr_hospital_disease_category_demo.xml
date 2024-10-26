@@ -1,0 +1,29 @@
+<odoo>
+    <record id="disease_parent_1" model="hr.hospital.disease.category">
+        <field name="name">Infectious Diseases</field>
+    </record>
+
+    <record id="disease_parent_2" model="hr.hospital.disease.category">
+        <field name="name">Chronic Diseases</field>
+    </record>
+
+    <record id="disease_child_1" model="hr.hospital.disease.category">
+        <field name="name">Flu</field>
+        <field name="parent_id" ref="disease_parent_1"/>
+    </record>
+
+    <record id="disease_child_2" model="hr.hospital.disease.category">
+        <field name="name">COVID-19</field>
+        <field name="parent_id" ref="disease_parent_1"/>
+    </record>
+
+    <record id="disease_child_3" model="hr.hospital.disease.category">
+        <field name="name">Diabetes</field>
+        <field name="parent_id" ref="disease_parent_2"/>
+    </record>
+
+    <record id="disease_child_4" model="hr.hospital.disease.category">
+        <field name="name">Hypertension</field>
+        <field name="parent_id" ref="disease_parent_2"/>
+    </record>
+</odoo>

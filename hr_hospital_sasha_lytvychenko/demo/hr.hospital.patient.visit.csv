@@ -1,0 +1,7 @@
+"id","ref","patient_id:id","doctor_id:id","planned_visit_date","visit_date","visit_status"
+"hr_hospital_visit_1","VST1","hr_hospital_patient_1","hr_hospital_doctor_1","2024-10-16 14:30:00","2024-10-16 14:30:00","cancelled"
+"hr_hospital_visit_2","VST2","hr_hospital_patient_2","hr_hospital_doctor_2","2024-10-17 12:30:00","2024-10-18 11:30:00","planned"
+"hr_hospital_visit_3","VST3","hr_hospital_patient_3","hr_hospital_doctor_3","2024-10-19 09:30:00","2024-10-19 11:30:00","planned"
+"hr_hospital_visit_4","VST4","hr_hospital_patient_4","hr_hospital_doctor_4","2024-10-20 12:30:00","","planned"
+"hr_hospital_visit_5","VST5","hr_hospital_patient_1","hr_hospital_doctor_3","2024-10-21 12:30:00","","planned"
+"hr_hospital_visit_6","VST6","hr_hospital_patient_2","hr_hospital_doctor_4","2024-10-22 12:30:00","","planned"

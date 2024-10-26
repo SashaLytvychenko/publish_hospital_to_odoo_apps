@@ -1,0 +1,36 @@
+<odoo>
+    <record id="hr_hospital_reappointment_doctor_wizard_form" model="ir.ui.view">
+        <field name="name">hr.hospital.reappointment.doctor.wizard.form</field>
+        <field name="model">hr.hospital.reappointment.doctor.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <div class="alert alert-info text-center" role="status">
+                    This wizard add possibility to reappointment doctors
+                </div>
+                <group>
+                    <group>
+                        <field name="patient_id"/>
+                    </group>
+                    <group>
+                        <field name="doctor_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Reappoint Doctor" name="reappointment_doctor" type="object" class="oe_highlight"
+                            data-hotkey="q"/>
+                    <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_hospital_reappointment_doctor_wizard_action" model="ir.actions.act_window">
+        <field name="name">Reappoint Doctor</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.hospital.reappointment.doctor.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+
+
+    </record>
+</odoo>

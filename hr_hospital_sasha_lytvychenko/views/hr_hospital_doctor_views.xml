@@ -1,0 +1,204 @@
+<odoo>
+    <record id='hr_hospital_doctor_tree' model='ir.ui.view'>
+        <field name='name'>hr.hospital.doctor.tree ()</field>
+        <field name='model'>hr.hospital.doctor</field>
+        <field name='arch' type='xml'>
+            <tree>
+                <field name='surname_name'/>
+                <field name='gender'/>
+                <field name='specialization'/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="hr_hospital_doctor_print_disease_report"
+            model="ir.actions.server">
+        <field name="name">Print Disease Report</field>
+        <field name="model_id" ref="model_hr_hospital_doctor"/>
+        <field name="binding_model_id" ref="model_hr_hospital_doctor"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = {
+            'type': 'ir.actions.act_window',
+            'res_model': 'hr.hospital.disease.report.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            }
+        </field>
+    </record>
+
+
+    <record id='hr_hospital_doctor_form' model='ir.ui.view'>
+        <field name='name'>hr.hospital.doctor.form ()</field>
+        <field name='model'>hr.hospital.doctor</field>
+        <field name='arch' type='xml'>
+            <form>
+                <header>
+                    <button name="%(hr_hospital_doctor_print_disease_report)d"
+                            string="Print Disease Report" type="action"
+                            class="btn btn-primary"/>
+                </header>
+                <sheet>
+                    <field name='image' widget='image' class='oe_avatar'/>
+                    <group>
+                        <group>
+                            <field name='surname_name'/>
+                            <field name='phone'/>
+                            <field name='is_intern'/>
+                            <field name="doctor_mentor_id"
+                                   invisible="is_intern == False"/>
+                            <field name='visit_ids'/>
+                            <field name = 'user_id'/>
+                        </group>
+                        <group>
+                            <field name='email'/>
+                            <field name='specialization'/>
+                            <field name='gender'/>
+                            <field name='company_id'/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id='hr_hospital_doctor_search' model='ir.ui.view'>
+        <field name='name'>hr.hospital.doctor.search</field>
+        <field name='model'>hr.hospital.doctor</field>
+        <field name='arch' type='xml'>
+            <search>
+                <filter string="Doctor mentor"
+                        name="doctor_mentor"
+                        domain="[('is_intern','=',False)]"
+                        help='This filter help you find doctor mentor'/>
+                <separator/>
+                <filter string="Doctor intern"
+                        name="doctor_mentor"
+                        domain="[('is_intern','=',True)]"
+                        help='This filter help you find doctor intern'/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="hr_hospital_doctor_kanban" model="ir.ui.view">
+        <field name="name">hr.hospital.doctor.kanban</field>
+        <field name="model">hr.hospital.doctor</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="specialization"
+                    archivable="False"
+                    quick_create_view="hr.hospital.doctor.form">
+                <field name="surname_name"/>
+                <field name="specialization"/>
+                <field name="phone"/>
+                <field name="is_intern"/>
+                <field name="intern_ids"/>
+
+                <templates>
+
+                    <t t-name="kanban-menu">
+                        <t t-if="widget.editable">
+                            <a role="menuitem" type="edit"
+                               class="dropdown-item">Edit
+                            </a>
+                        </t>
+                        <t t-if="widget.deletable">
+                            <a role="menuitem" type="delete"
+                               class="dropdown-item">Delete
+                            </a>
+                        </t>
+                    </t>
+
+
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_content oe_kanban_global_click o_kanban_doctor_card">
+                            <div t-attf-data-id="{{ record.id }}"
+                                 class="o_kanban_record">
+
+
+                                <div class="o_kanban_header">
+                                    <img t-if="record.image_1920"
+                                         t-att-src="kanban_image('hr.hospital.doctor', 'image_1920', record.id)"
+                                         class="o_kanban_avatar img-thumbnail"/>
+
+                                    <div class="o_kanban_info">
+                                        <h4>
+                                            <t t-esc="record.surname_name.value"/>
+                                        </h4>
+                                        <span class="badge"
+                                              t-att-class="{'badge-primary': record.specialization.value == 'pediatrics', 'badge-success': record.specialization.value == 'pathology', 'badge-warning': record.specialization.value == 'psychiatry'}">
+                                            <t t-esc="record.specialization.value"/>
+                                        </span>
+                                    </div>
+                                </div>
+
+
+                                <div class="o_kanban_body">
+                                    <p>
+                                        <strong>Phone:</strong>
+                                        <t t-esc="record.phone.value"/>
+                                    </p>
+
+                                    <t t-if="record.intern_ids">
+                                        <p>
+                                            <strong>Mentor to:</strong>
+                                            <t t-esc="record.intern_ids.length"/>
+                                            intern(s)
+                                        </p>
+                                        <field name="intern_ids"
+                                               widget="many2many_tags_avatar"
+                                               options="{'no_create': True, 'no_create_edit': True}"/>
+                                    </t>
+                                    <t t-else="">
+                                        <p>
+                                            <strong>Status:</strong>
+                                            Not a mentor
+                                        </p>
+                                    </t>
+                                </div>
+
+
+                                <div class="o_kanban_footer">
+                                    <div class="o_kanban_buttons">
+                                        <a type="object" name="open_visit_form"
+                                           class="btn btn-secondary">Create
+                                            Visit
+                                        </a>
+                                        <a type="edit" class="btn btn-info">
+                                            Edit
+                                        </a>
+                                        <a type="object" name="view_profile"
+                                           class="btn btn-warning">View Profile
+                                        </a>
+                                        <a type="delete"
+                                           class="btn btn-danger">Delete
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record id='action_hr_hospital_doctor_window'
+            model='ir.actions.act_window'>
+        <field name='name'>Doctor</field>
+        <field name='type'>ir.actions.act_window</field>
+        <field name='res_model'>hr.hospital.doctor</field>
+        <field name='view_mode'>tree,form,kanban</field>
+    </record>
+
+    <menuitem id='hr_hospital_doctor'
+              action='action_hr_hospital_doctor_window'
+              parent='hr_hospital_main_menu'
+              name='Doctor' sequence='200'/>
+</odoo>
+
+
+

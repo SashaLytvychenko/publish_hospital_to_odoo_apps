@@ -1,0 +1,6 @@
+"id","surname_name","date_birth","gender","phone","email","doctor_id:id"
+"hr_hospital_patient_1","LeBron James","1987-09-07","male","2939239293","james@gmail.com","hr_hospital_doctor_1"
+"hr_hospital_patient_2","Michael Jordan","1976-05-01","male","934930434","kobe@gmail.com","hr_hospital_doctor_2"
+"hr_hospital_patient_3","Caitlin Clark","1999-03-09","female","796767676","clark@gmail.com","hr_hospital_doctor_3"
+"hr_hospital_patient_4","Mohamed Salah","1995-03-09","male","243244343","salah@gmail.com","hr_hospital_doctor_4"
+

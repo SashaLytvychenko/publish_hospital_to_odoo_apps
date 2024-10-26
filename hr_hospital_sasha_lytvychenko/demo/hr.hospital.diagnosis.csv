@@ -1,0 +1,7 @@
+"id","name","visit_id:id","description"
+"hr_hospital_diagnosis_1","Arrhythmia","hr_hospital_visit_1","Arrhythmia or irregular heartbeat is a condition in which the heart is unable to pump blood to the body efficiently."
+"hr_hospital_diagnosis_2","Arthritis","hr_hospital_visit_2","Arthritis is inflammation of muscles and joints. Symptoms of arthritis include."
+"hr_hospital_diagnosis_3","Chronic kidney disease","hr_hospital_visit_3","Chronic kidney disease is a condition in which the kidneys do not filter out waste from the blood, leading to the accumulation of waste in the body."
+"hr_hospital_diagnosis_4","Palpation","hr_hospital_visit_4","Palpation is the act of feeling the surface of the body with the hands to determine the characteristics of the organs beneath the surface."
+"hr_hospital_diagnosis_5","Percussion","hr_hospital_visit_5","Percussion is a diagnostic procedure used to determine the density of a part by tapping the surface with short, sharp blows and evaluating the resulting sounds."
+"hr_hospital_diagnosis_6","Auscultation","hr_hospital_visit_6","Auscultation is performed with a stethoscope to evaluate sounds produced by the heart, the lungs, the blood vessels, or the bowels."

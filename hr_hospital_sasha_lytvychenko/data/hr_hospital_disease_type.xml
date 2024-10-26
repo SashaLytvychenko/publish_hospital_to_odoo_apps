@@ -1,0 +1,14 @@
+<odoo noupdate='1'>
+    <record id='hr_hospital_disease_type_1' model='hr.hospital.disease.type'>
+        <field name='name'>COVID-19</field>
+        <field name='description'>This is disease...</field>
+    </record>
+    <record id='hr_hospital_disease_type_2' model='hr.hospital.disease.type'>
+        <field name='name'>Asthma</field>
+        <field name='description'>What is asthma? Asthma is a condition that affects the airways.</field>
+    </record>
+    <record id='hr_hospital_disease_type_3' model='hr.hospital.disease.type'>
+        <field name='name'>Cough</field>
+        <field name='description'>What is cough with mucus (moist, productive, rattling and loose).</field>
+    </record>
+</odoo>
