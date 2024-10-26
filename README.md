@@ -1,0 +1,1 @@
+# publish_hospital_to_odoo_apps
